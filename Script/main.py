@@ -29,15 +29,37 @@ class MainWindows(QtWidgets.QMainWindow):
     self.refreshButton = QtWidgets.QPushButton('Refresh', self)
     self.removeButton = QtWidgets.QPushButton('Remove', self)
 
+    self.liste.setFont(QtGui.QFont('Arial', 14))
+
+    self.addButton.setFont(QtGui.QFont('Arial', 12))
+    self.addButton.setMinimumSize(QtCore.QSize(20, 0))
+
+    self.modButton.setFont(QtGui.QFont('Arial', 12))
+    self.modButton.setMinimumSize(QtCore.QSize(20, 0))
+
     self.mainLayout = QtWidgets.QHBoxLayout()
-    self.leftButtonLayout = QtWidgets.QGridLayout()
+    self.leftLayout = QtWidgets.QGridLayout()
+    self.buttonLayout = QtWidgets.QVBoxLayout()
 
-    self.leftButtonLayout.addWidget(self.addButton, 1, 1)
-    self.leftButtonLayout.addWidget(self.modButton, 2, 1)
-    self.leftButtonLayout.addWidget(self.refreshButton, 3, 1)
-    self.leftButtonLayout.addWidget(self.removeButton, 4, 1)
+    self.separatorMain = QtWidgets.QFrame(self)
+    self.separatorMain.setFrameShape(QtWidgets.QFrame.VLine)
+    self.separatorMain.setLineWidth(10)
 
-    self.mainLayout.addLayout(self.leftButtonLayout)
+    self.separatorBut = QtWidgets.QFrame(self)
+    self.separatorBut.setFrameShape(QtWidgets.QFrame.HLine)
+    self.separatorBut.setLineWidth(5)
+
+    self.buttonLayout.addWidget(self.addButton, 1)
+    self.buttonLayout.addWidget(self.modButton, 2)
+    self.buttonLayout.addWidget(self.separatorBut, 3)
+    self.buttonLayout.addWidget(self.removeButton, 4)
+    self.buttonLayout.addWidget(self.refreshButton, 5)
+
+    self.leftLayout.setAlignment(QtCore.Qt.AlignTop)
+
+    self.leftLayout.addLayout(self.buttonLayout, 1, 1)
+    self.mainLayout.addLayout(self.leftLayout)
+    self.mainLayout.addWidget(self.separatorMain, 2)
     self.mainLayout.addWidget(self.liste, 4)
 
     self.main_widget.setLayout(self.mainLayout)
@@ -47,8 +69,11 @@ class MainWindows(QtWidgets.QMainWindow):
     self.makeListe()
     self.initButton()
 
-    self.show()
+    
+    self.setFixedSize(364, 210)
 
+    self.show()
+    
   def initButton(self):
     self.addButton.clicked.connect(self.addClicked)
     self.refreshButton.clicked.connect(self.makeListe)

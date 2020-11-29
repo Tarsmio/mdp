@@ -45,6 +45,8 @@ class modWindow(QtWidgets.QMainWindow):
 
     self.initButton()
 
+    self.setFixedSize(274, 265)
+
     self.show()
 
   def initButton(self):
