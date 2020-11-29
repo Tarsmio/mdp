@@ -22,6 +22,7 @@ class MainWindows(QtWidgets.QMainWindow):
   def initUI(self):
     self.main_widget = QtWidgets.QWidget()
     self.setWindowTitle('Gestionnaire de mot de passe')
+    self.setWindowIcon(QtGui.QIcon("Image/Icone/cadena.png"))
 
     self.liste = QtWidgets.QListWidget(self)
     self.addButton = QtWidgets.QPushButton('Ajouter', self)
@@ -95,7 +96,17 @@ class MainWindows(QtWidgets.QMainWindow):
 
     for value in self.mdp:
       item = value['name']
-      self.liste.addItem(item)
+      if value['type'] == "Autre":
+        witem = QtWidgets.QListWidgetItem(QtGui.QIcon('Image/Icone/cadena.png'), item)
+      elif value['type'] == "Google":
+        witem = QtWidgets.QListWidgetItem(QtGui.QIcon('Image/Icone/google.png'), item)
+      elif value['type'] == "Discord":
+        witem = QtWidgets.QListWidgetItem(QtGui.QIcon('Image/Icone/discord.png'), item)
+      elif value['type'] == "Twitter":
+        witem = QtWidgets.QListWidgetItem(QtGui.QIcon('Image/Icone/twiter.jpg'), item)
+      elif value['type'] == "Instagram":
+        witem = QtWidgets.QListWidgetItem(QtGui.QIcon('Image/Icone/insta.png'), item)
+      self.liste.addItem(witem)
 
   def clickedInList(self, item):
     for value in self.mdp:
