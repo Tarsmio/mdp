@@ -82,20 +82,58 @@ class modWindow(QtWidgets.QMainWindow):
     self.valide.clicked.connect(self.validation)
     self.annule.clicked.connect(self.quitThis)
 
+    self.initRadio()
+    self.radTypeAutreSelect.toggled.connect(self.onCheck)
+    self.radTypeDiscordSelect.toggled.connect(self.onCheck)
+    self.radTypeGoogleSelect.toggled.connect(self.onCheck)
+    self.radTypeInstaSelect.toggled.connect(self.onCheck)
+    self.radTypeTwitterSelect.toggled.connect(self.onCheck)
+
+  def initRadio(self):
+    if self.vsave[self.elementNumber].get('type') is None:
+      self.radTypeAutreSelect.setChecked(True)
+      self.currentType = "Autre"
+    else :
+      if self.vsave[self.elementNumber]['type'] == "Autre":
+        self.radTypeAutreSelect.setChecked(True)
+        self.currentType = "Autre"
+      elif self.vsave[self.elementNumber]['type'] == "Google":
+        self.radTypeGoogleSelect.setChecked(True)
+        self.currentType = "Google"
+      elif self.vsave[self.elementNumber]['type'] == "Discord":
+        self.radTypeDiscordSelect.setChecked(True)
+        self.currentType = "Discord"
+      elif self.vsave[self.elementNumber]['type'] == "Twitter":
+        self.radTypeTwitterSelect.setChecked(True)
+        self.currentType = "Twitter"
+      elif self.vsave[self.elementNumber]['type'] == "Instagram":
+        self.radTypeInstaSelect.setChecked(True)
+        self.currentType = "Instagram"
+
+  def onCheck(self):
+    selected = self.sender()
+
+    if selected.isChecked():
+      self.currentType = selected.text()
+
+    print(self.currentType)
+
   def validation(self):
     textName = self.nameEnter.text()
     textMdp = self.valueEnter.toPlainText()
 
-    if self.vsave != []:
-      for i in range(len(self.vsave)):
-        if self.vsave[i]['name'] == textName:
-          return QtWidgets.QMessageBox().information(self, 'Info', 'Ce mot de passe existe deja !')
+    if textName != self.vsave[self.elementNumber]['name']:
+      if self.vsave != []:
+        for i in range(len(self.vsave)):
+          if self.vsave[i]['name'] == textName:
+            return QtWidgets.QMessageBox().information(self, 'Info', 'Ce mot de passe existe deja !')
 
     final = self.vsave
 
     final[self.elementNumber] = {
       'name':textName,
-      'value':textMdp
+      'value':textMdp,
+      'type':self.currentType
     }
 
     vFinal = {

@@ -70,11 +70,27 @@ class AddWindow(QtWidgets.QMainWindow):
 
   def initButton(self):
     self.radTypeAutreSelect.setChecked(True)
+    self.currentType = 'Autre'
 
     self.valide.clicked.connect(self.pret)
     self.annule.clicked.connect(self.quitThis)
 
+    self.radTypeAutreSelect.toggled.connect(self.onCheck)
+    self.radTypeDiscordSelect.toggled.connect(self.onCheck)
+    self.radTypeGoogleSelect.toggled.connect(self.onCheck)
+    self.radTypeInstaSelect.toggled.connect(self.onCheck)
+    self.radTypeTwitterSelect.toggled.connect(self.onCheck)
+
+  def onCheck(self):
+    selected = self.sender()
+
+    if selected.isChecked():
+      self.currentType = selected.text()
+
+    print(self.currentType)
+
   def pret(self):
+
     textName = self.nameEnter.text()
     textMdp = self.valueEnter.toPlainText()    
 
@@ -87,7 +103,8 @@ class AddWindow(QtWidgets.QMainWindow):
 
     final.append({
       'name':textName,
-      'value':textMdp
+      'value':textMdp,
+      'type':self.currentType
     })
 
     vFinal = {
