@@ -22,12 +22,40 @@ class modWindow(QtWidgets.QMainWindow):
 
   def initUI(self):
     self.main_widget = QtWidgets.QWidget()
+    self.main_Tab = QtWidgets.QTabWidget()
     self.setWindowTitle("Modifier")
 
     self.nameEnter = QtWidgets.QLineEdit(self.vsave[self.elementNumber]['name'], self)
     self.valueEnter = QtWidgets.QTextEdit(self.vsave[self.elementNumber]['value'], self)
+
+    self.radTypeGoogleSelect = QtWidgets.QRadioButton('Google', self)
+    self.radTypeTwitterSelect = QtWidgets.QRadioButton('Twitter', self)
+    self.radTypeDiscordSelect = QtWidgets.QRadioButton('Discord', self)
+    self.radTypeInstaSelect = QtWidgets.QRadioButton('Instagram', self)
+    self.radTypeAutreSelect = QtWidgets.QRadioButton('Autre', self)
+
     self.valide = QtWidgets.QPushButton('Valider', self)
     self.annule = QtWidgets.QPushButton('Annuler', self)
+
+    self.valueWidget = QtWidgets.QWidget()
+    self.typeWidget = QtWidgets.QWidget()
+
+    self.main_Tab.addTab(self.valueWidget, QtGui.QIcon(), 'Valeurs')
+    self.main_Tab.addTab(self.typeWidget, QtGui.QIcon(), 'Type')
+
+    self.mainLayout = QtWidgets.QVBoxLayout()
+    self.buttonLayout = QtWidgets.QGridLayout()
+    self.valueLayout = QtWidgets.QVBoxLayout()
+    self.typeLayout = QtWidgets.QGridLayout()
+
+    self.valueLayout.addWidget(self.nameEnter, 1)
+    self.valueLayout.addWidget(self.valueEnter, 2)
+
+    self.typeLayout.addWidget(self.radTypeGoogleSelect, 1, 1)
+    self.typeLayout.addWidget(self.radTypeDiscordSelect, 2, 1)
+    self.typeLayout.addWidget(self.radTypeTwitterSelect, 3, 1)
+    self.typeLayout.addWidget(self.radTypeInstaSelect, 1, 2)
+    self.typeLayout.addWidget(self.radTypeAutreSelect, 2, 2)
 
     self.mainLayout = QtWidgets.QVBoxLayout()
     self.buttonLayout = QtWidgets.QGridLayout()
@@ -35,11 +63,12 @@ class modWindow(QtWidgets.QMainWindow):
     self.buttonLayout.addWidget(self.valide, 1, 1)
     self.buttonLayout.addWidget(self.annule, 1, 2)
 
-    self.mainLayout.addWidget(self.nameEnter)
-    self.mainLayout.addWidget(self.valueEnter)
+    self.mainLayout.addWidget(self.main_Tab)
     self.mainLayout.addLayout(self.buttonLayout)
 
     self.main_widget.setLayout(self.mainLayout)
+    self.valueWidget.setLayout(self.valueLayout)
+    self.typeWidget.setLayout(self.typeLayout)
 
     self.setCentralWidget(self.main_widget)
 
