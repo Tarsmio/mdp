@@ -30,6 +30,13 @@ class MainWindows(QtWidgets.QMainWindow):
     self.refreshButton = QtWidgets.QPushButton('Refresh', self)
     self.removeButton = QtWidgets.QPushButton('Remove', self)
 
+    self.deffaultLogo = QtGui.QPixmap('Image/Icone/cadena.png')
+    self.logoMdp = QtWidgets.QLabel()
+    self.logoMdp.setPixmap(self.deffaultLogo)
+    self.logoMdp.setMaximumSize(QtCore.QSize(40,40))
+    self.nameInfo = QtWidgets.QLineEdit("Nom", self)
+    self.mdpInfo = QtWidgets.QLineEdit("Mdp", self)
+
     self.liste.setFont(QtGui.QFont('Arial', 14))
 
     self.addButton.setFont(QtGui.QFont('Arial', 12))
@@ -38,9 +45,13 @@ class MainWindows(QtWidgets.QMainWindow):
     self.modButton.setFont(QtGui.QFont('Arial', 12))
     self.modButton.setMinimumSize(QtCore.QSize(20, 0))
 
-    self.mainLayout = QtWidgets.QHBoxLayout()
+    self.mainLayout = QtWidgets.QVBoxLayout()
+    self.upLayout = QtWidgets.QHBoxLayout()
+    self.downLayout = QtWidgets.QGridLayout()
     self.leftLayout = QtWidgets.QGridLayout()
     self.buttonLayout = QtWidgets.QVBoxLayout()
+    self.mdpInfoLayout = QtWidgets.QVBoxLayout()
+    self.mdpWidget = QtWidgets.QWidget()
 
     self.separatorMain = QtWidgets.QFrame(self)
     self.separatorMain.setFrameShape(QtWidgets.QFrame.VLine)
@@ -56,13 +67,23 @@ class MainWindows(QtWidgets.QMainWindow):
     self.buttonLayout.addWidget(self.removeButton, 4)
     self.buttonLayout.addWidget(self.refreshButton, 5)
 
-    self.leftLayout.setAlignment(QtCore.Qt.AlignTop)
+    self.leftLayout.setAlignment(QtCore.Qt.AlignJustify)
 
     self.leftLayout.addLayout(self.buttonLayout, 1, 1)
-    self.mainLayout.addLayout(self.leftLayout)
-    self.mainLayout.addWidget(self.separatorMain, 2)
-    self.mainLayout.addWidget(self.liste, 4)
+    self.upLayout.addLayout(self.leftLayout)
+    self.upLayout.addWidget(self.separatorMain, 2)
+    self.upLayout.addWidget(self.liste, 4)
 
+    self.downLayout.addWidget(self.logoMdp, 1, 1)
+    self.downLayout.addLayout(self.mdpInfoLayout, 1, 2)
+
+    self.mdpInfoLayout.addWidget(self.nameInfo, 1)
+    self.mdpInfoLayout.addWidget(self.mdpInfo, 2)
+
+    self.mainLayout.addLayout(self.upLayout, 1)
+    self.mainLayout.addWidget(self.mdpWidget, 2)
+
+    self.mdpWidget.setLayout(self.downLayout)
     self.main_widget.setLayout(self.mainLayout)
 
     self.setCentralWidget(self.main_widget)

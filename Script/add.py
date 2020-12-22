@@ -92,10 +92,10 @@ class AddWindow(QtWidgets.QMainWindow):
   def pret(self):
 
     textName = self.nameEnter.text()
-    textMdp = self.valueEnter.toPlainText()    
+    textMdp = self.valueEnter.toPlainText()
 
     if self.save['mdp'] != []:
-      for i in range(len(self.save)):
+      for i in range(len(self.save['mdp'])):
         if self.save['mdp'][i]['name'] == textName:
           return QtWidgets.QMessageBox().information(self, 'Info', 'Ce mot de passe existe deja !')
 

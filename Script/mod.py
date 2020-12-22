@@ -78,6 +78,7 @@ class modWindow(QtWidgets.QMainWindow):
 
     self.show()
 
+
   def initButton(self):
     self.valide.clicked.connect(self.validation)
     self.annule.clicked.connect(self.quitThis)
