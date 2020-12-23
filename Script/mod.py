@@ -32,6 +32,7 @@ class modWindow(QtWidgets.QMainWindow):
     self.radTypeTwitterSelect = QtWidgets.QRadioButton('Twitter', self)
     self.radTypeDiscordSelect = QtWidgets.QRadioButton('Discord', self)
     self.radTypeInstaSelect = QtWidgets.QRadioButton('Instagram', self)
+    self.radTypeSnapSelect = QtWidgets.QRadioButton('Snapchat', self)
     self.radTypeAutreSelect = QtWidgets.QRadioButton('Autre', self)
 
     self.valide = QtWidgets.QPushButton('Valider', self)
@@ -55,7 +56,8 @@ class modWindow(QtWidgets.QMainWindow):
     self.typeLayout.addWidget(self.radTypeDiscordSelect, 2, 1)
     self.typeLayout.addWidget(self.radTypeTwitterSelect, 3, 1)
     self.typeLayout.addWidget(self.radTypeInstaSelect, 1, 2)
-    self.typeLayout.addWidget(self.radTypeAutreSelect, 2, 2)
+    self.typeLayout.addWidget(self.radTypeSnapSelect, 2, 2)
+    self.typeLayout.addWidget(self.radTypeAutreSelect, 3, 2)
 
     self.mainLayout = QtWidgets.QVBoxLayout()
     self.buttonLayout = QtWidgets.QGridLayout()
@@ -89,6 +91,7 @@ class modWindow(QtWidgets.QMainWindow):
     self.radTypeGoogleSelect.toggled.connect(self.onCheck)
     self.radTypeInstaSelect.toggled.connect(self.onCheck)
     self.radTypeTwitterSelect.toggled.connect(self.onCheck)
+    self.radTypeSnapSelect.toggled.connect(self.onCheck)
 
   def initRadio(self):
     if self.vsave[self.elementNumber].get('type') is None:
@@ -110,6 +113,9 @@ class modWindow(QtWidgets.QMainWindow):
       elif self.vsave[self.elementNumber]['type'] == "Instagram":
         self.radTypeInstaSelect.setChecked(True)
         self.currentType = "Instagram"
+      elif self.vsave[self.elementNumber]['type'] == "Snapchat":
+        self.radTypeSnapSelect.setChecked(True)
+        self.currentType = "Snapchat"
 
   def onCheck(self):
     selected = self.sender()

@@ -25,6 +25,7 @@ class AddWindow(QtWidgets.QMainWindow):
     self.radTypeTwitterSelect = QtWidgets.QRadioButton('Twitter', self)
     self.radTypeDiscordSelect = QtWidgets.QRadioButton('Discord', self)
     self.radTypeInstaSelect = QtWidgets.QRadioButton('Instagram', self)
+    self.radTypeSnapSelect = QtWidgets.QRadioButton('Snapchat', self)
     self.radTypeAutreSelect = QtWidgets.QRadioButton('Autre', self)
 
     self.valide = QtWidgets.QPushButton('Valider', self)
@@ -48,7 +49,8 @@ class AddWindow(QtWidgets.QMainWindow):
     self.typeLayout.addWidget(self.radTypeDiscordSelect, 2, 1)
     self.typeLayout.addWidget(self.radTypeTwitterSelect, 3, 1)
     self.typeLayout.addWidget(self.radTypeInstaSelect, 1, 2)
-    self.typeLayout.addWidget(self.radTypeAutreSelect, 2, 2)
+    self.typeLayout.addWidget(self.radTypeSnapSelect, 2, 2)
+    self.typeLayout.addWidget(self.radTypeAutreSelect, 3, 2)
 
     self.buttonLayout.addWidget(self.valide, 1, 1)
     self.buttonLayout.addWidget(self.annule, 1, 2)
@@ -80,6 +82,7 @@ class AddWindow(QtWidgets.QMainWindow):
     self.radTypeGoogleSelect.toggled.connect(self.onCheck)
     self.radTypeInstaSelect.toggled.connect(self.onCheck)
     self.radTypeTwitterSelect.toggled.connect(self.onCheck)
+    self.radTypeSnapSelect.toggled.connect(self.onCheck)
 
   def onCheck(self):
     selected = self.sender()

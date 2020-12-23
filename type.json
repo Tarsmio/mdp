@@ -18,5 +18,9 @@
   "Instagram":{
     "name":"Instagram",
     "logo":"Image/Icone/insta.png"
+  },
+  "Snapchat":{
+    "name":"Snapchat",
+    "logo":"Image/Icone/snap.png"
   }
 }
