@@ -18,6 +18,8 @@ class MainWindows(QtWidgets.QMainWindow):
       with open('save.json', 'w', encoding='utf-8') as f:
         json.dump(defaultSAVE, f)
 
+    self.loadType()
+
     self.initUI()
 
   def initUI(self):
@@ -110,6 +112,7 @@ class MainWindows(QtWidgets.QMainWindow):
     self.refreshButton.clicked.connect(self.makeListe)
     self.removeButton.clicked.connect(self.mdpRemove)
     self.modButton.clicked.connect(self.modClicked)
+    self.copyButton.clicked.connect(self.copyClicked)
 
     self.liste.currentItemChanged.connect(self.clickedInList)
 
@@ -119,6 +122,12 @@ class MainWindows(QtWidgets.QMainWindow):
 
     self.mdp = saveJson["mdp"]
 
+  def loadType(self):
+    with open("type.json", "r", encoding="utf-8") as f:
+      typeJson = json.load(f)
+    
+    self.typeListe = typeJson
+
   def makeListe(self):
     self.liste.clear()
 
@@ -126,16 +135,8 @@ class MainWindows(QtWidgets.QMainWindow):
 
     for value in self.mdp:
       item = value['name']
-      if value['type'] == "Autre":
-        witem = QtWidgets.QListWidgetItem(QtGui.QIcon('Image/Icone/cadena.png'), item)
-      elif value['type'] == "Google":
-        witem = QtWidgets.QListWidgetItem(QtGui.QIcon('Image/Icone/google.png'), item)
-      elif value['type'] == "Discord":
-        witem = QtWidgets.QListWidgetItem(QtGui.QIcon('Image/Icone/discord.png'), item)
-      elif value['type'] == "Twitter":
-        witem = QtWidgets.QListWidgetItem(QtGui.QIcon('Image/Icone/twiter.jpg'), item)
-      elif value['type'] == "Instagram":
-        witem = QtWidgets.QListWidgetItem(QtGui.QIcon('Image/Icone/insta.png'), item)
+      witem = QtWidgets.QListWidgetItem(QtGui.QIcon(self.typeListe[value['type']]['logo']), item)
+  
       self.liste.addItem(witem)
 
     self.clickedInList()
@@ -154,16 +155,7 @@ class MainWindows(QtWidgets.QMainWindow):
       if value['name'] == current.text():
         self.actMdp = value
 
-    if self.actMdp['type'] == "Autre":
-      logo = "Image/Icone/cadena.png"
-    elif self.actMdp['type'] == "Google":
-      logo = 'Image/Icone/google.png'
-    elif self.actMdp['type'] == "Discord":
-      logo = 'Image/Icone/discord.png'
-    elif self.actMdp['type'] == "Twitter":
-      logo = 'Image/Icone/twiter.jpg'
-    elif self.actMdp['type'] == "Instagram":
-      logo = 'Image/Icone/insta.png'
+    logo = self.typeListe[self.actMdp['type']]['logo']
 
     newLogo = Scaling().scaleTo64(QtGui.QPixmap(logo))
     mdp = self.actMdp['value']
@@ -182,6 +174,15 @@ class MainWindows(QtWidgets.QMainWindow):
     if current == None : return QtWidgets.QMessageBox().information(self, "Info", "Rien n'est selectionée")
 
     modWindow(self, current, self)
+
+  def copyClicked(self):
+    current = self.liste.currentItem()
+
+    for value in self.mdp:
+      if value['name'] == current.text():
+        self.actMdp = value
+
+    clipboard.copy(self.actMdp['value'])
 
   def mdpRemove(self):
     self.loadSave()

@@ -1,0 +1,22 @@
+{
+  "Autre":{
+    "name":"Autre",
+    "logo":"Image/Icone/cadena.png"
+  },
+  "Google":{
+    "name":"Google",
+    "logo":"Image/Icone/google.png"
+  },
+  "Discord":{
+    "name":"Discord",
+    "logo":"Image/Icone/discord.png"
+  },
+  "Twitter":{
+    "name":"Twitter",
+    "logo":"Image/Icone/twiter.jpg"
+  },
+  "Instagram":{
+    "name":"Instagram",
+    "logo":"Image/Icone/insta.png"
+  }
+}
