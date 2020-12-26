@@ -27,6 +27,13 @@ class MainWindows(QtWidgets.QMainWindow):
     self.setWindowTitle('Gestionnaire de mot de passe')
     self.setWindowIcon(QtGui.QIcon("Image/Icone/cadena.png"))
 
+    self.menu = self.menuBar()
+    self.fichierMenu = QtWidgets.QMenu("Fichier", self.menu)
+    self.fichierMenuUpdate = QtWidgets.QAction(text="Update", parent=self.fichierMenu)
+
+    self.menu.addMenu(self.fichierMenu)
+    self.fichierMenu.addAction(self.fichierMenuUpdate)
+
     self.liste = QtWidgets.QListWidget(self)
     self.addButton = QtWidgets.QPushButton('Ajouter', self)
     self.modButton = QtWidgets.QPushButton('Modifier', self)
@@ -66,12 +73,7 @@ class MainWindows(QtWidgets.QMainWindow):
     self.separatorMain.setFrameShape(QtWidgets.QFrame.VLine)
     self.separatorMain.setLineWidth(10)
 
-    self.separatorBut = QtWidgets.QFrame(self)
-    self.separatorBut.setFrameShape(QtWidgets.QFrame.HLine)
-    self.separatorBut.setLineWidth(5)
-
     self.buttonLayout.addWidget(self.addButton, 1)
-    self.buttonLayout.addWidget(self.separatorBut, 3)
     self.buttonLayout.addWidget(self.refreshButton, 5)
 
     self.leftLayout.setAlignment(QtCore.Qt.AlignJustify)
@@ -115,6 +117,8 @@ class MainWindows(QtWidgets.QMainWindow):
     self.copyButton.clicked.connect(self.copyClicked)
 
     self.liste.currentItemChanged.connect(self.clickedInList)
+
+    self.fichierMenuUpdate.triggered.connect(self.updateApp)
 
   def loadSave(self):
     with open("save.json", "r", encoding="utf-8") as f:
@@ -209,6 +213,9 @@ class MainWindows(QtWidgets.QMainWindow):
       json.dump(vFinal, n)
 
     self.makeListe()
+
+  def updateApp(self):
+    print("test")
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
