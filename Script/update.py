@@ -12,7 +12,7 @@ class SelfUpdate(QtWidgets.QMainWindow):
 
     self.mclass = mclass
     self.latestVersion = latest
-    self.latestURL = latestURL
+    self.latestVersionURL = latestURL
     self.actVersion = actVer
 
     self.iniUI()
