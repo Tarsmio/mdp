@@ -3,6 +3,7 @@ import sys
 import json
 from add import AddWindow
 from mod import modWindow
+from update import SelfUpdate
 from scale import Scaling
 import os
 import clipboard
@@ -215,7 +216,7 @@ class MainWindows(QtWidgets.QMainWindow):
     self.makeListe()
 
   def updateApp(self):
-    print("test")
+    SelfUpdate(self, self)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
