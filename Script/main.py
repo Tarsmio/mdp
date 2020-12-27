@@ -3,7 +3,7 @@ import sys
 import json
 from add import AddWindow
 from mod import modWindow
-from update import SelfUpdate
+from update import SelfUpdate, checkUpdate
 from scale import Scaling
 import os
 import clipboard
@@ -18,7 +18,8 @@ class MainWindows(QtWidgets.QMainWindow):
       }
       with open('save.json', 'w', encoding='utf-8') as f:
         json.dump(defaultSAVE, f)
-
+    
+    self.updateINFO = checkUpdate()
     self.loadType()
 
     self.initUI()
@@ -216,7 +217,7 @@ class MainWindows(QtWidgets.QMainWindow):
     self.makeListe()
 
   def updateApp(self):
-    SelfUpdate(self, self)
+    SelfUpdate(self, self.updateINFO['version'], self.updateINFO['url'], self.updateINFO['actVersion'], self)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
