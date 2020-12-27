@@ -71,6 +71,10 @@ class SelfUpdate(QtWidgets.QMainWindow):
 
     self.show()
 
+  def initButton(self):
+    self.askValidButton.clicked.connect(self.update)
+    self.askDeniedButton.clicked.connect(self.denied)
+
   def changeStatut(self, etat):
     """Etat 1 : Verification de mise a jour
     Etat 2 : Demande de mise a jour
@@ -112,6 +116,7 @@ class SelfUpdate(QtWidgets.QMainWindow):
   
   def update(self):
     print("Updating...")
+    self.changeStatut(3)
 
     request.urlretrieve(self.latestVersionURL, "Script/latest.zip")
 
@@ -124,3 +129,8 @@ class SelfUpdate(QtWidgets.QMainWindow):
 
     os.remove("Script/latest.zip")
     rmtree("latest/")
+
+    self.changeStatut(4)
+
+  def denied(self):
+    self.hide()
