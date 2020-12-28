@@ -217,7 +217,14 @@ class MainWindows(QtWidgets.QMainWindow):
     self.makeListe()
 
   def updateApp(self):
-    SelfUpdate(self, self.updateINFO['version'], self.updateINFO['url'], self.updateINFO['actVersion'], self)
+    SelfUpdate(
+      self,
+      self.updateINFO['version'],
+      self.updateINFO['url'],
+      self.updateINFO['actVersion'],
+      self.updateINFO['co'],
+      self
+    )
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

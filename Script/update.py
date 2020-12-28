@@ -7,16 +7,25 @@ from shutil import copytree, rmtree
 
 class SelfUpdate(QtWidgets.QMainWindow):
 
-  def __init__(self, mclass, latest, latestURL, actVer, parent=None):
+  def __init__(self, mclass, latest, latestURL, actVer, co, parent=None):
     super(SelfUpdate, self).__init__(parent)
 
     self.mclass = mclass
     self.latestVersion = latest
     self.latestVersionURL = latestURL
     self.actVersion = actVer
+    self.conec = co
 
     self.iniUI()
-    self.starting()
+    
+    if self.conec:
+      self.starting()
+    else:
+      self.upLabel.setText("Aucune connexion internet")
+      self.askDeniedButton.setText("Quitter")
+      self.askValidButton.setEnabled(False)
+      self.askDeniedButton.setEnabled(True)
+      self.show()
 
   def iniUI(self):
     self.setWindowTitle("Update")
@@ -68,22 +77,28 @@ class SelfUpdate(QtWidgets.QMainWindow):
   def selfUpdating(self):
     print("Updating...")
 
-    request.urlretrieve(self.latestVersionURL, "Script/latest.zip")
+    try:
+      request.urlretrieve(self.latestVersionURL, "Script/latest.zip")
 
-    with zipfile.ZipFile("Script/latest.zip", 'r') as zip_ref:
-      zip_ref.extractall("latest/")
+      with zipfile.ZipFile("Script/latest.zip", 'r') as zip_ref:
+        zip_ref.extractall("latest/")
 
-    pathToCopy = "latest/"+os.listdir("latest/")[0]+"/"
+      pathToCopy = "latest/"+os.listdir("latest/")[0]+"/"
 
-    copytree(pathToCopy, "./", dirs_exist_ok=True)
+      copytree(pathToCopy, "./", dirs_exist_ok=True)
 
-    os.remove("Script/latest.zip")
-    rmtree("latest/")
+      os.remove("Script/latest.zip")
+      rmtree("latest/")
 
-    self.upLabel.setText("Vous etes a jour")
-    self.askDeniedButton.setText("Quitter")
-    self.askValidButton.setEnabled(False)
-    self.askDeniedButton.setEnabled(True)
+      self.upLabel.setText("Vous etes a jour")
+      self.askDeniedButton.setText("Quitter")
+      self.askValidButton.setEnabled(False)
+      self.askDeniedButton.setEnabled(True)
+    except:
+      self.upLabel.setText("Aucune connexion internet")
+      self.askDeniedButton.setText("Quitter")
+      self.askValidButton.setEnabled(False)
+      self.askDeniedButton.setEnabled(True)
 
   def denied(self):
     self.hide()
@@ -91,9 +106,18 @@ class SelfUpdate(QtWidgets.QMainWindow):
 def checkUpdate():
     with open("version.txt", "r") as f:
       actVersion = f.read()
-    rep = requ.get("https://api.github.com/repos/Tarsmio/mdp/releases/latest")
-    return {
+    try:
+      rep = requ.get("https://api.github.com/repos/Tarsmio/mdp/releases/latest")
+      return {
       "version": rep.json()['tag_name'],
       "url": rep.json()['zipball_url'],
-      "actVersion": actVersion
-    }
+      "actVersion": actVersion,
+      "co": True
+      }
+    except:
+      return{
+        "version": None,
+        "url": None,
+        "actVersion": actVersion,
+        "co": False
+      }
