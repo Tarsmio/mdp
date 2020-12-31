@@ -37,11 +37,14 @@ class MainWindows(QtWidgets.QMainWindow):
     self.fichierMenu.addAction(self.fichierMenuUpdate)
 
     self.liste = QtWidgets.QListWidget(self)
-    self.addButton = QtWidgets.QPushButton('Ajouter', self)
+    self.addButton = QtWidgets.QPushButton(self)
     self.modButton = QtWidgets.QPushButton('Modifier', self)
-    self.refreshButton = QtWidgets.QPushButton('Refresh', self)
+    self.refreshButton = QtWidgets.QPushButton(self)
     self.removeButton = QtWidgets.QPushButton('Remove', self)
     self.copyButton = QtWidgets.QPushButton('Copy', self)
+
+    self.addButton.setIcon(QtGui.QIcon("Image/add.png"))
+    self.refreshButton.setIcon(QtGui.QIcon("Image/re.png"))
 
     self.deffaultLogo = QtGui.QPixmap('Image/Icone/cadena.png')
     self.deffaultLogo = Scaling().scaleTo64(self.deffaultLogo)
@@ -65,24 +68,13 @@ class MainWindows(QtWidgets.QMainWindow):
     self.mainLayout = QtWidgets.QVBoxLayout()
     self.upLayout = QtWidgets.QHBoxLayout()
     self.downLayout = QtWidgets.QGridLayout()
-    self.leftLayout = QtWidgets.QGridLayout()
-    self.buttonLayout = QtWidgets.QVBoxLayout()
+    self.buttonLayout = QtWidgets.QHBoxLayout()
     self.mdpInfoLayout = QtWidgets.QVBoxLayout()
     self.mdpButtonLayout = QtWidgets.QHBoxLayout()
     self.mdpWidget = QtWidgets.QWidget()
 
-    self.separatorMain = QtWidgets.QFrame(self)
-    self.separatorMain.setFrameShape(QtWidgets.QFrame.VLine)
-    self.separatorMain.setLineWidth(10)
-
     self.buttonLayout.addWidget(self.addButton, 1)
-    self.buttonLayout.addWidget(self.refreshButton, 5)
-
-    self.leftLayout.setAlignment(QtCore.Qt.AlignJustify)
-
-    self.leftLayout.addLayout(self.buttonLayout, 1, 1)
-    self.upLayout.addLayout(self.leftLayout)
-    self.upLayout.addWidget(self.separatorMain, 2)
+    self.buttonLayout.addWidget(self.refreshButton, 1)
     self.upLayout.addWidget(self.liste, 4)
 
     self.downLayout.addWidget(self.logoMdp, 1, 1)
@@ -96,8 +88,9 @@ class MainWindows(QtWidgets.QMainWindow):
     self.mdpInfoLayout.addWidget(self.mdpInfo, 2)
     self.mdpInfoLayout.addLayout(self.mdpButtonLayout, 3)
 
-    self.mainLayout.addLayout(self.upLayout, 1)
-    self.mainLayout.addWidget(self.mdpWidget, 2)
+    self.mainLayout.addLayout(self.buttonLayout, 1)
+    self.mainLayout.addLayout(self.upLayout, 2)
+    self.mainLayout.addWidget(self.mdpWidget, 3)
 
     self.mdpWidget.setLayout(self.downLayout)
     self.main_widget.setLayout(self.mainLayout)
@@ -107,7 +100,7 @@ class MainWindows(QtWidgets.QMainWindow):
     self.makeListe()
     self.initButton()
 
-    self.setFixedSize(364, 340)
+    self.setFixedSize(364, 380)
 
     self.show()
     
