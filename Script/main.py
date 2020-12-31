@@ -69,6 +69,9 @@ class MainWindows(QtWidgets.QMainWindow):
     self.nameInfo = QtWidgets.QLineEdit("Nom", self)
     self.mdpInfo = QtWidgets.QLineEdit("Mdp", self)
 
+    self.nameInfo.setAlignment(QtCore.Qt.AlignCenter)
+    self.mdpInfo.setAlignment(QtCore.Qt.AlignCenter)
+
     self.logoMdp.setObjectName("logoMDP")
 
     self.nameInfo.setReadOnly(True)
