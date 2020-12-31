@@ -25,6 +25,8 @@ class modWindow(QtWidgets.QMainWindow):
     self.main_Tab = QtWidgets.QTabWidget()
     self.setWindowTitle("Modifier")
 
+    self.main_Tab.setProperty("cssClass", "tab")
+
     self.nameEnter = QtWidgets.QLineEdit(self.vsave[self.elementNumber]['name'], self)
     self.valueEnter = QtWidgets.QTextEdit(self.vsave[self.elementNumber]['value'], self)
 
@@ -40,6 +42,9 @@ class modWindow(QtWidgets.QMainWindow):
 
     self.valueWidget = QtWidgets.QWidget()
     self.typeWidget = QtWidgets.QWidget()
+
+    self.valueWidget.setProperty("cssClass", "tabWidget")
+    self.typeWidget.setProperty("cssClass", "tabWidget")
 
     self.main_Tab.addTab(self.valueWidget, QtGui.QIcon(), 'Valeurs')
     self.main_Tab.addTab(self.typeWidget, QtGui.QIcon(), 'Type')

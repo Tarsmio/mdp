@@ -25,9 +25,14 @@ class MainWindows(QtWidgets.QMainWindow):
     self.initUI()
 
   def initUI(self):
+
+    with open("style.css", "r") as f:
+      css = str(f.read())
+
     self.main_widget = QtWidgets.QWidget()
     self.setWindowTitle('Gestionnaire de mot de passe')
     self.setWindowIcon(QtGui.QIcon("Image/Icone/cadena.png"))
+    self.setStyleSheet(css)
 
     self.menu = self.menuBar()
     self.fichierMenu = QtWidgets.QMenu("Fichier", self.menu)
@@ -43,16 +48,28 @@ class MainWindows(QtWidgets.QMainWindow):
     self.removeButton = QtWidgets.QPushButton('Remove', self)
     self.copyButton = QtWidgets.QPushButton('Copy', self)
 
+    self.addButton.setProperty("cssClass", "upBut")
+    self.refreshButton.setProperty("cssClass", "upBut")
+    self.modButton.setProperty("cssClass", "mdpBut")
+    self.removeButton.setProperty("cssClass", "mdpBut")
+    self.copyButton.setProperty("cssClass", "mdpBut")
+
     self.addButton.setIcon(QtGui.QIcon("Image/add.png"))
     self.refreshButton.setIcon(QtGui.QIcon("Image/re.png"))
+
+    self.addButton.setMaximumSize(32,32)
+    self.refreshButton.setMaximumSize(32,32)
 
     self.deffaultLogo = QtGui.QPixmap('Image/Icone/cadena.png')
     self.deffaultLogo = Scaling().scaleTo64(self.deffaultLogo)
     self.logoMdp = QtWidgets.QLabel()
     self.logoMdp.setPixmap(self.deffaultLogo)
-    self.logoMdp.setMaximumSize(QtCore.QSize(64,64))
+    self.logoMdp.setMinimumSize(QtCore.QSize(80,80))
+    self.logoMdp.setAlignment(QtCore.Qt.AlignCenter)
     self.nameInfo = QtWidgets.QLineEdit("Nom", self)
     self.mdpInfo = QtWidgets.QLineEdit("Mdp", self)
+
+    self.logoMdp.setObjectName("logoMDP")
 
     self.nameInfo.setReadOnly(True)
     self.mdpInfo.setReadOnly(True)
@@ -73,6 +90,8 @@ class MainWindows(QtWidgets.QMainWindow):
     self.mdpButtonLayout = QtWidgets.QHBoxLayout()
     self.mdpWidget = QtWidgets.QWidget()
 
+    self.buttonLayout.setAlignment(QtCore.Qt.AlignLeft)
+
     self.buttonLayout.addWidget(self.addButton, 1)
     self.buttonLayout.addWidget(self.refreshButton, 1)
     self.upLayout.addWidget(self.liste, 4)
@@ -81,8 +100,8 @@ class MainWindows(QtWidgets.QMainWindow):
     self.downLayout.addLayout(self.mdpInfoLayout, 1, 2)
 
     self.mdpButtonLayout.addWidget(self.removeButton, 1)
-    self.mdpButtonLayout.addWidget(self.modButton, 2)
-    self.mdpButtonLayout.addWidget(self.copyButton, 3)
+    self.mdpButtonLayout.addWidget(self.modButton, 1)
+    self.mdpButtonLayout.addWidget(self.copyButton, 1)
 
     self.mdpInfoLayout.addWidget(self.nameInfo, 1)
     self.mdpInfoLayout.addWidget(self.mdpInfo, 2)
@@ -100,7 +119,7 @@ class MainWindows(QtWidgets.QMainWindow):
     self.makeListe()
     self.initButton()
 
-    self.setFixedSize(364, 380)
+    self.setFixedSize(380, 395)
 
     self.show()
     
@@ -187,8 +206,6 @@ class MainWindows(QtWidgets.QMainWindow):
     self.loadSave()
 
     select = self.liste.currentItem()
-
-    print(select)
 
     if select == None : return QtWidgets.QMessageBox().information(self, "Info", "Rien n'est selectionée")
 

@@ -18,6 +18,8 @@ class AddWindow(QtWidgets.QMainWindow):
     self.main_Tab = QtWidgets.QTabWidget()
     self.setWindowTitle("Ajouter")
 
+    self.main_Tab.setProperty("cssClass", "tab")
+
     self.nameEnter = QtWidgets.QLineEdit('Nom', self)
     self.valueEnter = QtWidgets.QTextEdit('Mot de passe', self)
 
@@ -33,6 +35,9 @@ class AddWindow(QtWidgets.QMainWindow):
 
     self.valueWidget = QtWidgets.QWidget()
     self.typeWidget = QtWidgets.QWidget()
+
+    self.valueWidget.setProperty("cssClass", "tabWidget")
+    self.typeWidget.setProperty("cssClass", "tabWidget")
 
     self.main_Tab.addTab(self.valueWidget, QtGui.QIcon(), 'Valeurs')
     self.main_Tab.addTab(self.typeWidget, QtGui.QIcon(), 'Type')

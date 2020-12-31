@@ -1,0 +1,74 @@
+QMainWindow{
+  background: orange;
+}
+
+QMessageBox{
+  background: orange;
+}
+
+QMessageBox QLabel{
+  font-size: 20px;
+}
+
+QMenuBar{
+  background: rgb(185, 121, 3);
+}
+
+QListWidget{
+  color: black;
+  background: white;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+QWidget[cssClass="tabWidget"]{
+  background: yellow;
+}
+
+QTabWidget[cssClass="tab"]{
+  background: orange;
+  border: none;
+  color: yellow;
+}
+
+
+
+QPushButton{
+  color: black;
+  background: yellow;
+  border: 1px solid black;
+  border-top-left-radius: 6px;
+}
+
+QPushButton:hover{
+  background: rgb(190, 190, 2);
+}
+
+QPushButton:disabled{
+  background: rgb(97, 97, 17);
+  color: rgb(184, 184, 184);
+}
+
+QLineEdit{
+  color: black;
+  background: white;
+  border: 1px solid black;
+  border-radius: 6px;
+}
+
+QPushButton[cssClass="upBut"]{
+  background-color: transparent;
+  border: transparent;
+  margin: 32px;
+}
+
+QPushButton[cssClass="upBut"]:hover{
+  border: solid;
+  background-color: rgba(128, 128, 128, 0.513);
+}
+
+QLabel#logoMDP{
+  background: white;
+  border: 1px solid black;
+  border-radius: 6px;
+}
