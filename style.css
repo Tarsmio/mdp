@@ -14,6 +14,32 @@ QMenuBar{
   background: rgb(185, 121, 3);
 }
 
+QTabWidget::pane{
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+QTabBar::tab{
+  background: yellow;
+  border: 1px solid black;
+  border-top-left-radius: 6px;
+  padding: 5px;
+  padding-left: 7px;
+}
+
+QTabBar::tab:!selected{
+  margin-top: 4px;
+}
+
+QTabBar::tab:selected{
+  background: rgb(211, 211, 1);
+}
+
+QWidget[cssClass="tabWidget"]{
+  background: yellow;
+  border: none;
+}
+
 QListWidget{
   color: black;
   background: white;
@@ -26,6 +52,7 @@ QPushButton{
   background: yellow;
   border: 1px solid black;
   border-top-left-radius: 6px;
+  padding: 4px;
 }
 
 QPushButton:hover{
@@ -39,6 +66,28 @@ QPushButton:pressed{
 QPushButton:disabled{
   background: rgb(97, 97, 17);
   color: rgb(184, 184, 184);
+}
+
+QRadioButton{
+  font-size: 15px;
+  font: bold;
+}
+
+QRadioButton::indicator{
+  width: 15px;
+  height: 15px;
+}
+
+QRadioButton::indicator::unchecked{
+  image: url(./Image/radio_uncheck.png)
+}
+
+QRadioButton::indicator::unchecked:hover{
+  image: url(./Image/radio_uncheck_hover.png)
+}
+
+QRadioButton::indicator::checked{
+  image: url(./Image/radio_check.png)
 }
 
 QLineEdit{
