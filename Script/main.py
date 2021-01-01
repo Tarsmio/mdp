@@ -199,6 +199,8 @@ class MainWindows(QtWidgets.QMainWindow):
   def copyClicked(self):
     current = self.liste.currentItem()
 
+    if current == None : return QtWidgets.QMessageBox().information(self, "Info", "Rien n'est selectionée")
+
     for value in self.mdp:
       if value['name'] == current.text():
         self.actMdp = value
