@@ -21,19 +21,19 @@ class SelfUpdate(QtWidgets.QMainWindow):
     if self.conec:
       self.starting()
     else:
-      self.upLabel.setText("Aucune connexion internet")
-      self.askDeniedButton.setText("Quitter")
+      self.upLabel.setText(self.mclass.langueTexte['label']["1"])
+      self.askDeniedButton.setText(self.mclass.langueTexte["button"]["8"])
       self.askValidButton.setEnabled(False)
       self.askDeniedButton.setEnabled(True)
       self.show()
 
   def iniUI(self):
-    self.setWindowTitle("Update")
+    self.setWindowTitle(self.mclass.langueTexte["title"]["4"])
     self.mainWidget = QtWidgets.QWidget(self)
 
-    self.upLabel = QtWidgets.QLabel("Recherche de mise a jour ...")
-    self.askValidButton = QtWidgets.QPushButton(text="Installer")
-    self.askDeniedButton = QtWidgets.QPushButton(text="Annuler")
+    self.upLabel = QtWidgets.QLabel(self.mclass.langueTexte["label"]["2"])
+    self.askValidButton = QtWidgets.QPushButton(text=self.mclass.langueTexte["button"]["9"])
+    self.askDeniedButton = QtWidgets.QPushButton(text=self.mclass.langueTexte["button"]["10"])
 
     self.upLabel.setFont(QtGui.QFont('Arial', 14))
 
@@ -58,12 +58,12 @@ class SelfUpdate(QtWidgets.QMainWindow):
   def starting(self):
     isUpdate = self.verifyUpdate()
     if isUpdate :
-      self.upLabel.setText("La version "+self.latestVersion+" est disponible")
+      self.upLabel.setText(self.mclass.langueTexte["label"]["3.1"]+self.latestVersion+self.mclass.langueTexte["label"]["3.2"])
       self.askValidButton.setEnabled(True)
       self.askDeniedButton.setEnabled(True)
       self.show()
     else:
-      self.upLabel.setText("Aucune mise a jour disponible")
+      self.upLabel.setText(self.mclass.langueTexte["label"]["4"])
       self.askValidButton.setEnabled(False)
       self.askDeniedButton.setEnabled(True)
       self.show()
@@ -90,13 +90,13 @@ class SelfUpdate(QtWidgets.QMainWindow):
       os.remove("Script/latest.zip")
       rmtree("latest/")
 
-      self.upLabel.setText("Vous etes a jour")
-      self.askDeniedButton.setText("Quitter")
+      self.upLabel.setText(self.mclass.langueTexte["label"]["5"])
+      self.askDeniedButton.setText(self.mclass.langueTexte["button"]["11"])
       self.askValidButton.setEnabled(False)
       self.askDeniedButton.setEnabled(True)
     except:
-      self.upLabel.setText("Aucune connexion internet")
-      self.askDeniedButton.setText("Quitter")
+      self.upLabel.setText(self.mclass.langueTexte["label"]["6"])
+      self.askDeniedButton.setText(self.mclass.langueTexte["button"]["11"])
       self.askValidButton.setEnabled(False)
       self.askDeniedButton.setEnabled(True)
 

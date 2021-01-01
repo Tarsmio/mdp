@@ -1,0 +1,55 @@
+{
+  "lang":{
+    "title":{
+      "1":"Gestionnaire de mot de passe",
+      "2":"Ajouter",
+      "3":"Modifier",
+      "4":"Mise a jour"
+    },
+    "menu":{
+      "1":"Fichier",
+      "2":"Mise a jour"
+    },
+    "button":{
+      "1":"Modifier",
+      "2":"Effacer",
+      "3":"Copier",
+      "4":"Valider",
+      "5":"Annuler",
+      "6":"Valider",
+      "7":"Annuler",
+      "8":"Quitter",
+      "9":"Installer",
+      "10":"Annuler",
+      "11":"Quitter"
+    },
+    "label":{
+      "1":"Aucune connexion internet",
+      "2":"Recherche de mise a jour...",
+      "3.1":"La version ",
+      "3.2":" est disponible",
+      "4":"Aucune mise a jour disponible",
+      "5":"Vous etes a jour",
+      "6":"Aucune connexion internet"
+    },
+    "editLine":{
+      "1":"Nom",
+      "2":"Mot de passe",
+      "3":"Nom",
+      "4":"Mot de passe"
+    },
+
+    "tab":{
+      "1":"Valeur",
+      "2":"Type",
+      "3":"Valeur",
+      "4":"Type"
+    },
+    "messBox":{
+      "1":"Info",
+      "2":"Rien n'est selectionée",
+      "3":"Info",
+      "4":"Ce mot de passe existe deja !"
+    }
+  }
+}

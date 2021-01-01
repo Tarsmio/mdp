@@ -7,6 +7,9 @@ from update import SelfUpdate, checkUpdate
 from scale import Scaling
 import os
 import clipboard
+import locale
+import ctypes
+
 class MainWindows(QtWidgets.QMainWindow):
 
   def __init__(self, parent=None):
@@ -21,6 +24,7 @@ class MainWindows(QtWidgets.QMainWindow):
     
     self.updateINFO = checkUpdate()
     self.loadType()
+    self.loadLangue()
 
     self.initUI()
 
@@ -38,23 +42,23 @@ class MainWindows(QtWidgets.QMainWindow):
     iconWin.addFile("Image/Logo/logo_32.png", QtCore.QSize(32,32))
     iconWin.addFile("Image/Logo/logo_24.png", QtCore.QSize(24,24))
 
-    self.setWindowTitle('Gestionnaire de mot de passe')
+    self.setWindowTitle(self.langueTexte["title"]["1"])
     self.setWindowIcon(iconWin)
     self.setStyleSheet(css)
 
     self.menu = self.menuBar()
-    self.fichierMenu = QtWidgets.QMenu("Fichier", self.menu)
-    self.fichierMenuUpdate = QtWidgets.QAction(text="Update", parent=self.fichierMenu)
+    self.fichierMenu = QtWidgets.QMenu(self.langueTexte["menu"]["1"], self.menu)
+    self.fichierMenuUpdate = QtWidgets.QAction(text=self.langueTexte["menu"]["2"], parent=self.fichierMenu)
 
     self.menu.addMenu(self.fichierMenu)
     self.fichierMenu.addAction(self.fichierMenuUpdate)
 
     self.liste = QtWidgets.QListWidget(self)
     self.addButton = QtWidgets.QPushButton(self)
-    self.modButton = QtWidgets.QPushButton('Modifier', self)
+    self.modButton = QtWidgets.QPushButton(self.langueTexte["button"]["1"], self)
     self.refreshButton = QtWidgets.QPushButton(self)
-    self.removeButton = QtWidgets.QPushButton('Remove', self)
-    self.copyButton = QtWidgets.QPushButton('Copy', self)
+    self.removeButton = QtWidgets.QPushButton(self.langueTexte["button"]["2"], self)
+    self.copyButton = QtWidgets.QPushButton(self.langueTexte["button"]["3"], self)
 
     self.addButton.setProperty("cssClass", "upBut")
     self.refreshButton.setProperty("cssClass", "upBut")
@@ -74,8 +78,8 @@ class MainWindows(QtWidgets.QMainWindow):
     self.logoMdp.setPixmap(self.deffaultLogo)
     self.logoMdp.setMinimumSize(QtCore.QSize(80,80))
     self.logoMdp.setAlignment(QtCore.Qt.AlignCenter)
-    self.nameInfo = QtWidgets.QLineEdit("Nom", self)
-    self.mdpInfo = QtWidgets.QLineEdit("Mdp", self)
+    self.nameInfo = QtWidgets.QLineEdit(self.langueTexte["editLine"]["1"], self)
+    self.mdpInfo = QtWidgets.QLineEdit(self.langueTexte["editLine"]["2"], self)
 
     self.nameInfo.setAlignment(QtCore.Qt.AlignCenter)
     self.mdpInfo.setAlignment(QtCore.Qt.AlignCenter)
@@ -148,6 +152,18 @@ class MainWindows(QtWidgets.QMainWindow):
 
     self.fichierMenuUpdate.triggered.connect(self.updateApp)
 
+  def loadLangue(self):
+    langue = str(locale.getdefaultlocale()[0])[:2]
+
+    if langue == "fr":
+      with open("Lang/fr.json", "r", encoding="utf-8") as f:
+        extracted = json.load(f)
+        self.langueTexte = extracted["lang"]
+    else:
+      with open("Lang/en.json", "r", encoding="utf-8") as f:
+        extracted = json.load(f)
+        self.langueTexte = extracted["lang"]
+
   def loadSave(self):
     with open("save.json", "r", encoding="utf-8") as f:
       saveJson = json.load(f)
@@ -175,8 +191,8 @@ class MainWindows(QtWidgets.QMainWindow):
 
   def resetMdp(self):
     self.logoMdp.setPixmap(self.deffaultLogo)
-    self.mdpInfo.setText("Mot de passe")
-    self.nameInfo.setText("Nom")
+    self.mdpInfo.setText(self.langueTexte["editLine"]["2"])
+    self.nameInfo.setText(self.langueTexte["editLine"]["1"])
 
   def clickedInList(self):
     current = self.liste.currentItem()
@@ -203,14 +219,14 @@ class MainWindows(QtWidgets.QMainWindow):
   def modClicked(self):
     current = self.liste.currentItem()
 
-    if current == None : return QtWidgets.QMessageBox().information(self, "Info", "Rien n'est selectionée")
+    if current == None : return QtWidgets.QMessageBox().information(self, self.langueTexte["messBox"]["1"], self.langueTexte["messBox"]["2"])
 
     modWindow(self, current, self)
 
   def copyClicked(self):
     current = self.liste.currentItem()
 
-    if current == None : return QtWidgets.QMessageBox().information(self, "Info", "Rien n'est selectionée")
+    if current == None : return QtWidgets.QMessageBox().information(self, self.langueTexte["messBox"]["1"], self.langueTexte["messBox"]["2"])
 
     for value in self.mdp:
       if value['name'] == current.text():
@@ -223,7 +239,7 @@ class MainWindows(QtWidgets.QMainWindow):
 
     select = self.liste.currentItem()
 
-    if select == None : return QtWidgets.QMessageBox().information(self, "Info", "Rien n'est selectionée")
+    if select == None : return QtWidgets.QMessageBox().information(self, self.langueTexte["messBox"]["1"], self.langueTexte["messBox"]["2"])
 
     for i in range(len(self.mdp)):
       if self.mdp[i]['name'] == select.text():

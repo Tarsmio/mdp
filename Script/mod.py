@@ -23,7 +23,7 @@ class modWindow(QtWidgets.QMainWindow):
   def initUI(self):
     self.main_widget = QtWidgets.QWidget()
     self.main_Tab = QtWidgets.QTabWidget()
-    self.setWindowTitle("Modifier")
+    self.setWindowTitle(self.mainClass.langueTexte["title"]["3"])
 
     self.main_Tab.setProperty("cssClass", "tab")
 
@@ -37,8 +37,8 @@ class modWindow(QtWidgets.QMainWindow):
     self.radTypeSnapSelect = QtWidgets.QRadioButton('Snapchat', self)
     self.radTypeAutreSelect = QtWidgets.QRadioButton('Autre', self)
 
-    self.valide = QtWidgets.QPushButton('Valider', self)
-    self.annule = QtWidgets.QPushButton('Annuler', self)
+    self.valide = QtWidgets.QPushButton(self.mainClass.langueTexte["button"]["6"], self)
+    self.annule = QtWidgets.QPushButton(self.mainClass.langueTexte["button"]["7"], self)
 
     self.valueWidget = QtWidgets.QWidget()
     self.typeWidget = QtWidgets.QWidget()
@@ -46,8 +46,8 @@ class modWindow(QtWidgets.QMainWindow):
     self.valueWidget.setProperty("cssClass", "tabWidget")
     self.typeWidget.setProperty("cssClass", "tabWidget")
 
-    self.main_Tab.addTab(self.valueWidget, QtGui.QIcon(), 'Valeurs')
-    self.main_Tab.addTab(self.typeWidget, QtGui.QIcon(), 'Type')
+    self.main_Tab.addTab(self.valueWidget, QtGui.QIcon(), self.mainClass.langueTexte["tab"]["3"])
+    self.main_Tab.addTab(self.typeWidget, QtGui.QIcon(), self.mainClass.langueTexte["tab"]["4"])
 
     self.mainLayout = QtWidgets.QVBoxLayout()
     self.buttonLayout = QtWidgets.QGridLayout()

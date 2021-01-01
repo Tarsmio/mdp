@@ -16,12 +16,12 @@ class AddWindow(QtWidgets.QMainWindow):
   def initUI(self):
     self.main_widget = QtWidgets.QWidget()
     self.main_Tab = QtWidgets.QTabWidget()
-    self.setWindowTitle("Ajouter")
+    self.setWindowTitle(self.mainClass.langueTexte["title"]["2"])
 
     self.main_Tab.setProperty("cssClass", "tab")
 
-    self.nameEnter = QtWidgets.QLineEdit('Nom', self)
-    self.valueEnter = QtWidgets.QTextEdit('Mot de passe', self)
+    self.nameEnter = QtWidgets.QLineEdit(self.mainClass.langueTexte["editLine"]["3"], self)
+    self.valueEnter = QtWidgets.QTextEdit(self.mainClass.langueTexte["editLine"]["4"], self)
 
     self.radTypeGoogleSelect = QtWidgets.QRadioButton('Google', self)
     self.radTypeTwitterSelect = QtWidgets.QRadioButton('Twitter', self)
@@ -30,8 +30,8 @@ class AddWindow(QtWidgets.QMainWindow):
     self.radTypeSnapSelect = QtWidgets.QRadioButton('Snapchat', self)
     self.radTypeAutreSelect = QtWidgets.QRadioButton('Autre', self)
 
-    self.valide = QtWidgets.QPushButton('Valider', self)
-    self.annule = QtWidgets.QPushButton('Annuler', self)
+    self.valide = QtWidgets.QPushButton(self.mainClass.langueTexte["button"]["4"], self)
+    self.annule = QtWidgets.QPushButton(self.mainClass.langueTexte["button"]["5"], self)
 
     self.valueWidget = QtWidgets.QWidget()
     self.typeWidget = QtWidgets.QWidget()
@@ -39,8 +39,8 @@ class AddWindow(QtWidgets.QMainWindow):
     self.valueWidget.setProperty("cssClass", "tabWidget")
     self.typeWidget.setProperty("cssClass", "tabWidget")
 
-    self.main_Tab.addTab(self.valueWidget, QtGui.QIcon(), 'Valeurs')
-    self.main_Tab.addTab(self.typeWidget, QtGui.QIcon(), 'Type')
+    self.main_Tab.addTab(self.valueWidget, QtGui.QIcon(), self.mainClass.langueTexte["tab"]["1"])
+    self.main_Tab.addTab(self.typeWidget, QtGui.QIcon(), self.mainClass.langueTexte["tab"]["2"])
 
     self.mainLayout = QtWidgets.QVBoxLayout()
     self.buttonLayout = QtWidgets.QGridLayout()
@@ -105,7 +105,7 @@ class AddWindow(QtWidgets.QMainWindow):
     if self.save['mdp'] != []:
       for i in range(len(self.save['mdp'])):
         if self.save['mdp'][i]['name'] == textName:
-          return QtWidgets.QMessageBox().information(self, 'Info', 'Ce mot de passe existe deja !')
+          return QtWidgets.QMessageBox().information(self, self.mainClass.langueTexte["messBox"]["3"], self.mainClass.langueTexte["messBox"]["4"])
 
     final = self.save['mdp']
 

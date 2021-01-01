@@ -1,0 +1,55 @@
+{
+  "lang":{
+    "title":{
+      "1":"Password manager",
+      "2":"Add",
+      "3":"Edit",
+      "4":"Update"
+    },
+    "menu":{
+      "1":"File",
+      "2":"Update"
+    },
+    "button":{
+      "1":"Edit",
+      "2":"Remove",
+      "3":"Copy",
+      "4":"Done",
+      "5":"Cancel",
+      "6":"Done",
+      "7":"Cancel",
+      "8":"Quit",
+      "9":"Install",
+      "10":"Cancel",
+      "11":"Quit"
+    },
+    "label":{
+      "1":"No internet connection",
+      "2":"Searching for update",
+      "3.1":"The update ",
+      "3.2":" is available",
+      "4":"You are up to date",
+      "5":"You are up to date",
+      "6":"No internet connection"
+    },
+    "editLine":{
+      "1":"Name",
+      "2":"Password",
+      "3":"Name",
+      "4":"Password"
+    },
+
+    "tab":{
+      "1":"Value",
+      "2":"Type",
+      "3":"Value",
+      "4":"Type"
+    },
+    "messBox":{
+      "1":"Info",
+      "2":"Nothing is selected",
+      "3":"Info",
+      "4":"This password already exists !"
+    }
+  }
+}
