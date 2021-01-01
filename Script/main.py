@@ -30,8 +30,16 @@ class MainWindows(QtWidgets.QMainWindow):
       css = str(f.read())
 
     self.main_widget = QtWidgets.QWidget()
+
+    iconWin = QtGui.QIcon()
+    iconWin.addFile("Image/Logo/logo_256.png", QtCore.QSize(256,256))
+    iconWin.addFile("Image/Logo/logo_128.png", QtCore.QSize(128,128))
+    iconWin.addFile("Image/Logo/logo_64.png", QtCore.QSize(64,64))
+    iconWin.addFile("Image/Logo/logo_32.png", QtCore.QSize(32,32))
+    iconWin.addFile("Image/Logo/logo_24.png", QtCore.QSize(24,24))
+
     self.setWindowTitle('Gestionnaire de mot de passe')
-    self.setWindowIcon(QtGui.QIcon("Image/Icone/cadena.png"))
+    self.setWindowIcon(iconWin)
     self.setStyleSheet(css)
 
     self.menu = self.menuBar()
@@ -71,6 +79,9 @@ class MainWindows(QtWidgets.QMainWindow):
 
     self.nameInfo.setAlignment(QtCore.Qt.AlignCenter)
     self.mdpInfo.setAlignment(QtCore.Qt.AlignCenter)
+
+    self.nameInfo.setProperty("cssClass", "mdpLineEdit")
+    self.mdpInfo.setProperty("cssClass", "mdpLineEdit")
 
     self.logoMdp.setObjectName("logoMDP")
 
