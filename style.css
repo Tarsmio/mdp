@@ -10,41 +10,6 @@ QMessageBox QLabel{
   font-size: 20px;
 }
 
-QMenuBar{
-  background: rgb(185, 121, 3);
-}
-
-QMenuBar::item{
-  background: rgb(221, 144, 0);
-  border: 1px solid black;
-  border-bottom: none;
-  padding: 4px;
-  border-top-left-radius: 5px;
-}
-
-QMenuBar::item:selected, QMenuBar::item:pressed{
-  background: rgb(185, 121, 3);
-}
-
-QMenu{
-  background: rgb(185, 121, 3);
-}
-
-QMenu::item{
-  background: yellow;
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-QMenu::item:selected{
-  background: rgb(190, 190, 2);
-}
-
-QMenu::item:pressed{
-  background: rgb(51, 51, 0);
-}
-
 QTabWidget::pane{
   border: 1px solid black;
   border-radius: 3px;
