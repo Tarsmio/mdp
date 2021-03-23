@@ -7,7 +7,7 @@ defaultConfig = {
   "minCount" : 5,
   "majCount" : 5,
   "numberCount" : 5,
-  "spCount" : 1,
+  "spCount" : 1
 }
 
 defaultMajuscule = [

@@ -4,7 +4,8 @@
       "1":"Gestionnaire de mot de passe",
       "2":"Ajouter",
       "3":"Modifier",
-      "4":"Mise a jour"
+      "4":"Mise a jour",
+      "5":"Generateur de mot de passe"
     },
     "menu":{
       "1":"Fichier",
@@ -21,7 +22,16 @@
       "8":"Quitter",
       "9":"Installer",
       "10":"Annuler",
-      "11":"Quitter"
+      "11":"Quitter",
+      "12":"Generé",
+      "13":"Ajouter",
+      "14":"Valider"
+    },
+    "checkBox":{
+      "2":"Minuscule",
+      "3":"Majuscule",
+      "4":"Numero",
+      "5":"Caractère special"
     },
     "label":{
       "1":"Aucune connexion internet",
@@ -30,13 +40,15 @@
       "3.2":" est disponible",
       "4":"Aucune mise a jour disponible",
       "5":"Vous etes a jour",
-      "6":"Aucune connexion internet"
+      "6":"Aucune connexion internet",
+      "7":"Taille"
     },
     "editLine":{
       "1":"Nom",
       "2":"Mot de passe",
       "3":"Nom",
-      "4":"Mot de passe"
+      "4":"Mot de passe",
+      "5":"Parametre invalide !"
     },
 
     "tab":{

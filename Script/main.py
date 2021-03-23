@@ -3,6 +3,7 @@ import sys
 import json
 from add import AddWindow
 from mod import modWindow
+from generator import genWindow
 from update import SelfUpdate, checkUpdate
 from scale import Scaling
 import os
@@ -55,6 +56,7 @@ class MainWindows(QtWidgets.QMainWindow):
 
     self.liste = QtWidgets.QListWidget(self)
     self.addButton = QtWidgets.QPushButton(self)
+    self.genButton = QtWidgets.QPushButton(self)
     self.modButton = QtWidgets.QPushButton(self.langueTexte["button"]["1"], self)
     self.refreshButton = QtWidgets.QPushButton(self)
     self.removeButton = QtWidgets.QPushButton(self.langueTexte["button"]["2"], self)
@@ -62,15 +64,18 @@ class MainWindows(QtWidgets.QMainWindow):
 
     self.addButton.setProperty("cssClass", "upBut")
     self.refreshButton.setProperty("cssClass", "upBut")
+    self.genButton.setProperty("cssClass", "upBut")
     self.modButton.setProperty("cssClass", "mdpBut")
     self.removeButton.setProperty("cssClass", "mdpBut")
     self.copyButton.setProperty("cssClass", "mdpBut")
 
     self.addButton.setIcon(QtGui.QIcon("Image/add.png"))
     self.refreshButton.setIcon(QtGui.QIcon("Image/re.png"))
+    self.genButton.setIcon(QtGui.QIcon("Image/Icone/cadena.png"))
 
     self.addButton.setMaximumSize(32,32)
     self.refreshButton.setMaximumSize(32,32)
+    self.genButton.setMaximumSize(32,32)
 
     self.deffaultLogo = QtGui.QPixmap('Image/Icone/cadena.png')
     self.deffaultLogo = Scaling().scaleTo64(self.deffaultLogo)
@@ -112,6 +117,7 @@ class MainWindows(QtWidgets.QMainWindow):
 
     self.buttonLayout.addWidget(self.addButton, 1)
     self.buttonLayout.addWidget(self.refreshButton, 1)
+    self.buttonLayout.addWidget(self.genButton, 1)
     self.upLayout.addWidget(self.liste, 4)
 
     self.downLayout.addWidget(self.logoMdp, 1, 1)
@@ -144,6 +150,7 @@ class MainWindows(QtWidgets.QMainWindow):
   def initButton(self):
     self.addButton.clicked.connect(self.addClicked)
     self.refreshButton.clicked.connect(self.makeListe)
+    self.genButton.clicked.connect(self.genClicked)
     self.removeButton.clicked.connect(self.mdpRemove)
     self.modButton.clicked.connect(self.modClicked)
     self.copyButton.clicked.connect(self.copyClicked)
@@ -215,6 +222,9 @@ class MainWindows(QtWidgets.QMainWindow):
 
   def addClicked(self):
     AddWindow(self, self)
+
+  def genClicked(self):
+    genWindow(self, 1, self)
 
   def modClicked(self):
     current = self.liste.currentItem()
