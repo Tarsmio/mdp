@@ -4,7 +4,8 @@
       "1":"Password manager",
       "2":"Add",
       "3":"Edit",
-      "4":"Update"
+      "4":"Update",
+      "5":"Password Generator"
     },
     "menu":{
       "1":"File",
@@ -21,7 +22,16 @@
       "8":"Quit",
       "9":"Install",
       "10":"Cancel",
-      "11":"Quit"
+      "11":"Quit",
+      "12":"Generate",
+      "13":"Add",
+      "14":"Done"
+    },
+    "checkBox":{
+      "2":"Lowercase",
+      "3":"Uppercase",
+      "4":"Number",
+      "5":"Symbol"
     },
     "label":{
       "1":"No internet connection",
@@ -30,13 +40,15 @@
       "3.2":" is available",
       "4":"You are up to date",
       "5":"You are up to date",
-      "6":"No internet connection"
+      "6":"No internet connection",
+      "7":"Length"
     },
     "editLine":{
       "1":"Name",
       "2":"Password",
       "3":"Name",
-      "4":"Password"
+      "4":"Password",
+      "5":"Invalid parameter !"
     },
 
     "tab":{
