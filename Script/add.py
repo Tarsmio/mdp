@@ -3,13 +3,14 @@ import json
 import sys
 
 class AddWindow(QtWidgets.QMainWindow):
-  def __init__(self, mclass, parent=None):
+  def __init__(self, mclass, parent=None, option=False):
     super(AddWindow, self).__init__(parent)
 
     with open('save.json', 'r', encoding='utf-8') as f:
       self.save = json.load(f)
     
     self.mainClass = mclass
+    self.option = option
 
     self.initUI()
   
@@ -70,6 +71,7 @@ class AddWindow(QtWidgets.QMainWindow):
     self.setCentralWidget(self.main_widget)
 
     self.initButton()
+    self.initPassword()
 
     self.setFixedSize(274, 265)
 
@@ -88,6 +90,13 @@ class AddWindow(QtWidgets.QMainWindow):
     self.radTypeInstaSelect.toggled.connect(self.onCheck)
     self.radTypeTwitterSelect.toggled.connect(self.onCheck)
     self.radTypeSnapSelect.toggled.connect(self.onCheck)
+
+  def initPassword(self):
+    if self.option:
+      print("test1")
+      if "password" in self.option:
+        print(self.option)
+        self.valueEnter.setText(self.option["password"])
 
   def onCheck(self):
     selected = self.sender()

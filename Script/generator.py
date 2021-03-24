@@ -1,5 +1,6 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from pgenerator import passwordGenerator
+from add import AddWindow
 
 class genWindow(QtWidgets.QMainWindow):
 
@@ -8,6 +9,9 @@ class genWindow(QtWidgets.QMainWindow):
 
     self.mainClass = mclass
     self.ver = ver
+
+    self.isDone = False
+    self.password = ""
 
     self.initUI()
 
@@ -91,6 +95,7 @@ class genWindow(QtWidgets.QMainWindow):
 
   def initButton(self):
     self.butGener.clicked.connect(self.gen)
+    self.butAdd.clicked.connect(self.addButton)
 
     if self.ver == 1 :
       self.butGener.setVisible(True)
@@ -100,6 +105,8 @@ class genWindow(QtWidgets.QMainWindow):
       self.butGener.setVisible(True)
       self.butAdd.setVisible(False)
       self.butValider.setVisible(True)
+
+    self.setButtonDone()
 
   def initRad(self):
     self.radMinuscule.setChecked(True)
@@ -133,6 +140,18 @@ class genWindow(QtWidgets.QMainWindow):
     self.spinSp.setMinimum(1)
     self.spinSp.setValue(1)
 
+  def setButtonDone(self):
+    if self.ver == 1:
+      if self.isDone :
+        self.butAdd.setEnabled(True)
+      else:
+        self.butAdd.setEnabled(False)
+    elif self.ver == 2:
+      if self.isDone :
+        self.butValider.setEnabled(True)
+      else:
+        self.butValider.setEnabled(False)
+
   def onCheck(self):
     selected = self.sender()
     typeRad = selected.property('radType')
@@ -155,6 +174,14 @@ class genWindow(QtWidgets.QMainWindow):
         self.spinNumber.show()
       elif typeRad == 4:
         self.spinSp.show()
+
+  def addButton(self):
+    option = {
+      "password": self.password
+    }
+
+    AddWindow(self.mainClass, self.mainClass, option)
+    self.close()
 
   def gen(self):
     allParameter = 0
@@ -197,3 +224,7 @@ class genWindow(QtWidgets.QMainWindow):
       password = passwordGenerator(config)
 
       self.passwordWiew.setText(password)
+      self.password = password
+
+      self.isDone = True
+      self.setButtonDone()
